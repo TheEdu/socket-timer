@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { subscribeToTimer } from './api';
 
 class App extends Component {
+
+  state = {
+    timestamp: 'no timestamp yet'
+  };
+
+  constructor(props) {
+    super(props);
+    subscribeToTimer((err, timestamp) => this.setState({ 
+      timestamp
+    }));
+  }
+
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            socket-timer => {this.state.timestamp}
           </p>
           <a
             className="App-link"
